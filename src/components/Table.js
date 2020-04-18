@@ -108,14 +108,16 @@ const Table = ({ data }) => {
   const filteredItems = filterText
     ? rows.filter(
         row =>
-          row.name && row.name.toLowerCase().includes(filterText.toLowerCase()) ||
-          row.work && row.work.toLowerCase().includes(filterText.toLowerCase())
+        (row.name &&
+          row.name.toLowerCase().includes(filterText.toLowerCase())) ||
+        (row.work &&
+          row.work.toLowerCase().includes(filterText.toLowerCase()))
       )
     : rows;
 
   if (data.length > 0 && rows.length === 0) {
     setColumns(generateColumns(data[0], setSelectedPerson));
-    setRows(data.slice(1).map((r, i) => ({ ...{ id: i }, ...r })));
+    setRows(data.map((r, i) => ({ ...{ id: i }, ...r })));
   }
 
   if (rows.length === 0) {
